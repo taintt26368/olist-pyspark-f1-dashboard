@@ -1,0 +1,38 @@
+[server]
+headless = true
+runOnSave = true
+
+[browser]
+gatherUsageStats = false
+
+[client]
+showErrorDetails = true
+toolbarMode = "viewer"
+
+[theme]
+base = "light"
+primaryColor = "#005A9C"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F3F6F9"
+textColor = "#172B4D"
+linkColor = "#005A9C"
+borderColor = "#CBD5E1"
+showWidgetBorder = true
+showSidebarBorder = true
+baseRadius = "8px"
+buttonRadius = "8px"
+font = "'Segoe UI', 'Noto Sans':https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap"
+headingFont = "'Segoe UI', 'Noto Sans':https://fonts.googleapis.com/css2?family=Noto+Sans:wght@600;700&display=swap"
+baseFontSize = 16
+headingFontSizes = ["30px", "25px", "21px", "18px", "16px", "14px"]
+headingFontWeights = [700, 700, 600, 600, 600, 600]
+chartCategoricalColors = ["#005A9C", "#2B88D8", "#107C10", "#D83B01", "#8764B8", "#C239B3", "#69797E"]
+dataframeBorderColor = "#CBD5E1"
+dataframeHeaderBackgroundColor = "#EAF2F8"
+
+[theme.sidebar]
+backgroundColor = "#F3F6F9"
+secondaryBackgroundColor = "#E6EEF5"
+textColor = "#172B4D"
+primaryColor = "#005A9C"
+borderColor = "#CBD5E1"

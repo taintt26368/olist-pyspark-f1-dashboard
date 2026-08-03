@@ -1,0 +1,3 @@
+﻿tap_du_lieu,nguon_majority_class,majority_label,class_counts_nguon,model,common_threshold,tp,tn,fp,fn,n,accuracy,precision,recall,specificity,fpr,f1,f1_direct,auc,alert_rate,prevalence
+validation,train_fit,0,"{""0"": 57828, ""1"": 4226}",Baseline majority class,,0,14278,0,1047,15325,0.9316802610114192,0.0,0.0,1.0,0.0,0.0,0.0,0.5,0.0,0.06831973898858075
+test,train_full,0,"{""0"": 72106, ""1"": 5273}",Baseline majority class,,0,17830,0,1261,19091,0.9339479335812687,0.0,0.0,1.0,0.0,0.0,0.0,0.5,0.0,0.06605206641873133

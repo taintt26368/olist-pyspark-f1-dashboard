@@ -1,0 +1,22 @@
+﻿thuoc_tinh,gia_tri
+thoi_gian_bat_dau,2026-07-31T21:51:11.950204+07:00
+thoi_gian_ket_thuc,2026-07-31T21:52:11.313806+07:00
+thoi_luong_giay,59.38501410000026
+project,C:\data_python\olist_tieu_luan
+dataset,C:\data_python\olist_tieu_luan\data\output\orders_enriched.csv
+dataset_sha256,7301d0c09c808be88ef35203991797fcdf23c3b414f33de978c995b9371601e1
+python,3.11.15
+pyspark,4.1.2
+java,17.0.19
+run_tag,official
+seed,42
+threshold_mode,AUTO_VALIDATION
+manual_common_threshold,
+threshold_test_thu_cong,"[0.09, 0.094, 0.1]"
+common_threshold,0.094
+baseline_name,Baseline majority class
+baseline_label_validation,0
+baseline_label_test,0
+signature_version,05_f1_official_v1
+demo_model,Logistic Regression
+reproducibility,MATCH

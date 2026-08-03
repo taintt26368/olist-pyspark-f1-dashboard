@@ -1,0 +1,4 @@
+﻿model,common_threshold,so_mau_test,so_don_late_that,so_canh_bao,probability_min,probability_mean,probability_max
+Baseline majority class,,19091,1261.0,0.0,0.0,0.0,0.0
+Logistic Regression,0.094,19091,1261.0,3910.0,0.00014485199057734377,0.06891871875900722,0.7394476565195455
+Random Forest,0.094,19091,1261.0,1014.0,0.0449458009781884,0.06817004504144332,0.15614032317558788

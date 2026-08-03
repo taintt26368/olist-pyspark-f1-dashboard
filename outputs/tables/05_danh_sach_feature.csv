@@ -1,0 +1,29 @@
+﻿ten_cot,loai_du_lieu,trang_thai,ly_do
+customer_state,categorical feature,giữ,Có thể biết tại thời điểm đặt hàng
+main_seller_state,categorical feature,giữ,Có thể biết tại thời điểm đặt hàng
+main_category,categorical feature,giữ,Có thể biết tại thời điểm đặt hàng
+item_count,numeric feature,giữ,Có thể biết tại thời điểm đặt hàng
+product_count,numeric feature,giữ,Có thể biết tại thời điểm đặt hàng
+seller_count,numeric feature,giữ,Có thể biết tại thời điểm đặt hàng
+total_price,numeric feature,giữ,Có thể biết tại thời điểm đặt hàng
+total_freight,numeric feature,giữ,Có thể biết tại thời điểm đặt hàng
+average_item_price,numeric feature,giữ,Có thể biết tại thời điểm đặt hàng
+total_weight_g,numeric feature,giữ,Có thể biết tại thời điểm đặt hàng
+total_volume_cm3,numeric feature,giữ,Có thể biết tại thời điểm đặt hàng
+freight_ratio,numeric feature,giữ,Có thể biết tại thời điểm đặt hàng
+purchase_year,numeric feature,giữ,Có thể biết tại thời điểm đặt hàng
+purchase_month,numeric feature,giữ,Có thể biết tại thời điểm đặt hàng
+purchase_day_of_week,numeric feature,giữ,Có thể biết tại thời điểm đặt hàng
+purchase_hour,numeric feature,giữ,Có thể biết tại thời điểm đặt hàng
+estimated_delivery_days,numeric feature,giữ,Có thể biết tại thời điểm đặt hàng
+customer_seller_same_state,numeric feature,giữ,Có thể biết tại thời điểm đặt hàng
+delivery_difference_days,không dùng,loại,Feature leakage hoặc chưa chứng minh có sẵn lúc đặt hàng
+main_payment_type,không dùng,loại,Feature leakage hoặc chưa chứng minh có sẵn lúc đặt hàng
+max_installments,không dùng,loại,Feature leakage hoặc chưa chứng minh có sẵn lúc đặt hàng
+order_delivered_customer_date,không dùng,loại,Feature leakage hoặc chưa chứng minh có sẵn lúc đặt hàng
+payment_record_count,không dùng,loại,Feature leakage hoặc chưa chứng minh có sẵn lúc đặt hàng
+payment_type_count,không dùng,loại,Feature leakage hoặc chưa chứng minh có sẵn lúc đặt hàng
+payment_value_total,không dùng,loại,Feature leakage hoặc chưa chứng minh có sẵn lúc đặt hàng
+review_comment_message,không dùng,loại,Feature leakage hoặc chưa chứng minh có sẵn lúc đặt hàng
+review_comment_title,không dùng,loại,Feature leakage hoặc chưa chứng minh có sẵn lúc đặt hàng
+review_score,không dùng,loại,Feature leakage hoặc chưa chứng minh có sẵn lúc đặt hàng

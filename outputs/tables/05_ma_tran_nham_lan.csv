@@ -1,0 +1,4 @@
+﻿tap_du_lieu,model,common_threshold,true_positive,true_negative,false_positive,false_negative,actual_late_total,actual_not_late_total,alert_total,no_alert_total,total
+test,Baseline majority class,,0,17830,0,1261,1261,17830,0,19091,19091
+test,Logistic Regression,0.094,553,14473,3357,708,1261,17830,3910,15181,19091
+test,Random Forest,0.094,241,17057,773,1020,1261,17830,1014,18077,19091

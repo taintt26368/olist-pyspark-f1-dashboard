@@ -1,0 +1,2 @@
+﻿model,trapezoid_index,point_i,point_i_plus_1,fpr_i,tpr_i,fpr_i_plus_1,tpr_i_plus_1,trapezoid_area
+Baseline majority class,0,0,1,0.0,0.0,1.0,1.0,0.5

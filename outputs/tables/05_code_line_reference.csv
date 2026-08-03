@@ -1,0 +1,179 @@
+﻿marker,dong_code_thuc_te,code_thuc_te,tinh_nang,cong_thuc,so_lieu_that,cach_kiem_tra
+READ_DATASET,2427-2432,"data = (
+            spark.read
+            .option(""header"", True)
+            .option(""inferSchema"", True)
+            .csv(DATA_FILE.as_uri())
+        ).cache()",Đọc dataset,spark.read.csv,96470 dòng,Assertion/CSV/report từ lần chạy hiện tại
+FEATURE_LEAKAGE,270-277,"feature_leakage = sorted(
+        set(danh_sach_feature).intersection(COT_LEAKAGE_CAM)
+    )
+    feature_ngoai_danh_sach = sorted(
+        set(danh_sach_feature) - set(cot_duoc_phep)
+    )
+    xac_nhan(
+        ""Không có feature leakage"",",Kiểm tra feature leakage,selected features ∩ leakage columns = ∅,PASS,Assertion/CSV/report từ lần chạy hiện tại
+NAN_INFINITY,291-298,"ket_qua = df.agg(*[
+        F.sum(
+            F.when(
+                F.isnan(F.col(ten_cot))
+                | (F.col(ten_cot) == float(""inf""))
+                | (F.col(ten_cot) == float(""-inf"")),
+                1,
+            ).otherwise(0)",Kiểm tra NaN/Infinity,isnan(x) hoặc x=±Infinity,PASS,Assertion/CSV/report từ lần chạy hiện tại
+LABEL_INPUT,2466-2473,"data_model = data.select(
+            ""order_id"",
+            *COT_PHAN_LOAI,
+            *COT_SO,
+            F.col(""is_late"").cast(""double"").alias(""is_late""),
+        )
+        for ten_cot in COT_PHAN_LOAI:
+            data_model = data_model.withColumn(",Tạo label input,label = cast(is_late as double),late=6534,Assertion/CSV/report từ lần chạy hiện tại
+SPLIT_TRAIN_TEST,2491-2495,"train_full, test = data_model.randomSplit([0.8, 0.2], seed=SEED)
+        train_full = train_full.orderBy(""order_id"").cache()
+        test = test.orderBy(""order_id"").cache()
+        so_train_full = train_full.count()
+        so_test = test.count()",Chia train_full/test,"80%/20%, seed=42",77379/19091,Assertion/CSV/report từ lần chạy hiện tại
+SPLIT_TRAIN_VALIDATION,2497-2504,"train_fit, validation = train_full.randomSplit(
+            [0.8, 0.2],
+            seed=SEED,
+        )
+        train_fit = train_fit.orderBy(""order_id"").cache()
+        validation = validation.orderBy(""order_id"").cache()
+        so_train_fit = train_fit.count()
+        so_validation = validation.count()",Chia train_fit/validation,"80%/20% của train_full, seed=42",62054/15325,Assertion/CSV/report từ lần chạy hiện tại
+STRING_INDEXER,354-361,"indexers = [
+        StringIndexer(
+            inputCol=cot,
+            outputCol=f""{cot}_index"",
+            handleInvalid=""keep"",
+        )
+        for cot in COT_PHAN_LOAI
+    ]",StringIndexer,category → index,3 categorical feature,Assertion/CSV/report từ lần chạy hiện tại
+ONE_HOT_ENCODER,363-367,"encoder = OneHotEncoder(
+        inputCols=cot_chi_so,
+        outputCols=cot_ma_hoa,
+        handleInvalid=""keep"",
+    )",OneHotEncoder,index → sparse vector,vector=141,Assertion/CSV/report từ lần chạy hiện tại
+IMPUTER,369-373,"imputer = Imputer(
+        inputCols=COT_SO,
+        outputCols=cot_so_da_dien,
+        strategy=""median"",
+    )",Imputer,median theo train scope,15 numeric feature,Assertion/CSV/report từ lần chạy hiện tại
+VECTOR_ASSEMBLER,375-380,"assembler = VectorAssembler(
+        inputCols=cot_so_da_dien + cot_ma_hoa,
+        outputCol=""features"",
+        handleInvalid=""keep"",
+    )
+    return Pipeline(stages=indexers + [encoder, imputer, assembler])",VectorAssembler,filled numeric + encoded categorical,dimension=141,Assertion/CSV/report từ lần chạy hiện tại
+BASELINE_MAJORITY,674-681,"counts = (
+        df_train
+        .groupBy(""is_late"")
+        .count()
+        .orderBy(F.col(""count"").desc(), F.col(""is_late"").asc())
+        .collect()
+    )
+    xac_nhan(",Tạo baseline,majority class chỉ xác định từ train_full; áp dụng cố định lên test,"prediction=0, AUC=0.500000",Assertion/CSV/report từ lần chạy hiện tại
+FIT_LOGISTIC,575,model_logistic = logistic.fit(df_ready),Fit Logistic Regression,"maxIter=50, regParam=0.01",intercept=-366.682799587486,Assertion/CSV/report từ lần chạy hiện tại
+FIT_RANDOM_FOREST,577-578,"model_random_forest = random_forest.fit(df_ready)
+    return model_logistic, model_random_forest",Fit Random Forest,"numTrees=30, maxDepth=6, seed=42",trees=30,Assertion/CSV/report từ lần chạy hiện tại
+PROBABILITY_LATE,584-590,"return (
+        model.transform(df_ready)
+        .withColumn(
+            ""probability_late"",
+            vector_to_array(""probability"")[1],
+        )
+    )",Tạo probability_late,vector_to_array(probability)[1],hai model,Assertion/CSV/report từ lần chạy hiện tại
+THRESHOLD_SEARCH,954-961,"coarse_rows = [
+        danh_gia_common_threshold(
+            danh_sach_validation,
+            threshold,
+            ""coarse"",
+            auc_logistic,
+            auc_random_forest,
+        )",Tìm common threshold,coarse 0.01; refine 0.001,110 candidate,Assertion/CSV/report từ lần chạy hiện tại
+SELECT_COMMON_THRESHOLD,933-939,"hop_le = [dong for dong in candidates if dong[""hop_le_alert_rate""]]
+    xac_nhan(
+        ""Có common threshold thỏa alert rate của cả hai model"",
+        bool(hop_le),
+        f""số candidate hợp lệ={len(hop_le)}"",
+    )
+    return max(hop_le, key=khoa_xep_hang_threshold)",Chọn common threshold,max average_f1 → minimum_f1 → average_recall → min average_alert_rate → max threshold,0.094,Assertion/CSV/report từ lần chạy hiện tại
+MANUAL_THRESHOLD_COMPARISON,884-891,"thresholds = sorted({float(x) for x in danh_sach_threshold})
+    xac_nhan(
+        f""Threshold thử thủ công của {ten_tap} nằm trong [0, 1]"",
+        bool(thresholds) and all(0.0 <= x <= 1.0 for x in thresholds),
+        f""thresholds={thresholds}"",
+    )
+    rows = []
+    for threshold in thresholds:",So sánh threshold thủ công,tính lại confusion matrix và metrics tại danh sách threshold cấu hình,6 dòng,Assertion/CSV/report từ lần chạy hiện tại
+PREDICTION_COMMON,712-718,"return df_probability.withColumn(
+        ""prediction_common"",
+        F.when(
+            F.col(""probability_late"") >= F.lit(common_threshold),
+            F.lit(1.0),
+        ).otherwise(F.lit(0.0)),
+    )",Tạo prediction_common,1 nếu probability_late ≥ common threshold,0.094,Assertion/CSV/report từ lần chạy hiện tại
+CONFUSION_MATRIX,728-735,"dong = df_prediction.agg(
+        F.sum(
+            F.when(
+                (F.col(""is_late"") == 1)
+                & (F.col(""prediction_common"") == 1),
+                1,
+            ).otherwise(0)
+        ).alias(""tp""),",Tính confusion matrix,"đếm TP, TN, FP, FN","TP=553, TN=14473, FP=3357, FN=708",Assertion/CSV/report từ lần chạy hiện tại
+METRIC_ACCURACY,601,"accuracy = chia_an_toan(tp + tn, n)",Tính Accuracy,(TP+TN)/N,0.787072442512,Assertion/CSV/report từ lần chạy hiện tại
+METRIC_PRECISION,603,"precision = chia_an_toan(tp, tp + fp)",Tính Precision,TP/(TP+FP),0.141432225064,Assertion/CSV/report từ lần chạy hiện tại
+METRIC_RECALL,605,"recall = chia_an_toan(tp, tp + fn)",Tính Recall,TP/(TP+FN),0.438540840603,Assertion/CSV/report từ lần chạy hiện tại
+METRIC_SPECIFICITY,607,"specificity = chia_an_toan(tn, tn + fp)",Tính Specificity,TN/(TN+FP),0.811721817162,Assertion/CSV/report từ lần chạy hiện tại
+METRIC_FPR,609,"fpr = chia_an_toan(fp, fp + tn)",Tính FPR,FP/(FP+TN),0.188278182838,Assertion/CSV/report từ lần chạy hiện tại
+METRIC_F1,611-612,"f1 = chia_an_toan(2 * precision * recall, precision + recall)
+    f1_truc_tiep = chia_an_toan(2 * tp, 2 * tp + fp + fn)",Tính F1,2×Precision×Recall/(Precision+Recall),0.213885128602,Assertion/CSV/report từ lần chạy hiện tại
+METRIC_ALERT_RATE,614-621,"alert_rate = chia_an_toan(tp + fp, n)
+    prevalence = chia_an_toan(tp + fn, n)
+    xac_nhan(
+        ""F1 theo hai công thức khớp nhau"",
+        abs(f1 - f1_truc_tiep) <= 1e-12,
+        f""F1={f1:.17g}, F1 trực tiếp={f1_truc_tiep:.17g}"",
+    )
+    cac_chi_so = [",Tính alert rate,(TP+FP)/N,0.204808548531,Assertion/CSV/report từ lần chạy hiện tại
+ROC_POINTS,991-998,"scores = [
+        (
+            float(dong[""probability_late""]),
+            int(dong[""is_late""]),
+            dong[""order_id""],
+        )
+        for dong in df_probability.select(
+            ""order_id"", ""is_late"", ""probability_late""",Tính ROC points,"sắp probability giảm dần; TPR=TP/P, FPR=FP/N",LR=19081 points,Assertion/CSV/report từ lần chạy hiện tại
+AUC_TRAPEZOID,1051-1058,"dien_tich = (
+            (tiep_theo[""fpr""] - hien_tai[""fpr""])
+            * (tiep_theo[""tpr""] + hien_tai[""tpr""])
+            / 2
+        )
+        trapezoids.append({
+            ""model"": ten_model,
+            ""trapezoid_index"": index,",Tính AUC bằng trapezoid,ΔFPR×(TPR_i+TPR_i+1)/2,0.701896135099,Assertion/CSV/report từ lần chạy hiện tại
+VERIFY_LOGISTIC_SCORE,1235-1242,"probability_manual = sigmoid_on_dinh(z_manual)
+        probability_spark = float(dong[""probability_logistic""])
+        absolute_difference = abs(probability_manual - probability_spark)
+        xac_nhan(
+            f""Logistic Regression probability order {dong['alias']} khớp Spark"",
+            absolute_difference <= 1e-10,
+            ""manual=""
+            f""{probability_manual:.17g}, Spark={probability_spark:.17g}, """,Kiểm chứng Logistic Regression probability,sigmoid(intercept+Σ coefficient×value),"PASS cho A, B, C, D",Assertion/CSV/report từ lần chạy hiện tại
+VERIFY_RANDOM_FOREST_SCORE,1319-1326,"probability_manual = chia_an_toan(raw_model[1], raw_total)
+        probability_spark = float(dong[""probability_random_forest""])
+        probability_difference = abs(probability_manual - probability_spark)
+        xac_nhan(
+            f""Random Forest probability order {dong['alias']} khớp Spark"",
+            probability_difference <= 1e-10,
+            ""manual=""
+            f""{probability_manual:.17g}, Spark={probability_spark:.17g}, """,Kiểm chứng Random Forest probability,rawPrediction[1]/ΣrawPrediction,"PASS cho A, B, C, D",Assertion/CSV/report từ lần chạy hiện tại
+SELECT_DEMO_ORDERS,1117-1124,"quy_tac = {
+        ""A"": (
+            (F.col(""is_late"") == 1) & (F.col(""prediction_common"") == 1),
+            False,
+            ""True Positive có probability_late cao nhất"",
+        ),
+        ""B"": (
+            (F.col(""is_late"") == 0) & (F.col(""prediction_common"") == 1),","Chọn order A, B, C, D",quy tắc xác định trên test của model demo,"A=f46b842d9b4dfd29acf5eec998837ede, B=686c0ba20be3837a5041edbc39d3f9ae, C=9b1d71b20edcf15ab15e0bb4a932f23f, D=c2bb89b5c1dd978d507284be78a04cb2",Assertion/CSV/report từ lần chạy hiện tại

@@ -1,0 +1,2 @@
+﻿trang_thai,previous_signature_sha256,current_signature_sha256,noi_dung_so_sanh
+MATCH,ec543f47703be58e1068a1bebb9c44c632f3e9766da82d87ddb134b460c25dbd,ec543f47703be58e1068a1bebb9c44c632f3e9766da82d87ddb134b460c25dbd,common threshold; data split; validation/test confusion matrix và metrics; order A/B/C/D

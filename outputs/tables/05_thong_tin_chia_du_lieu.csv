@@ -1,0 +1,6 @@
+﻿tap_du_lieu,so_dong,so_order_id_khac_nhau,so_don_late,so_don_not_late,late_rate,kiem_tra_giao_nhau
+toan_bo,96470,96470,6534,89936,0.06773090079817559,không áp dụng
+train_full,77379,77379,5273,72106,0.06814510396877706,với test: 0
+train_fit,62054,62054,4226,57828,0.0681019756985851,với validation: 0
+validation,15325,15325,1047,14278,0.06831973898858075,với train_fit: 0
+test,19091,19091,1261,17830,0.06605206641873133,với train_full: 0

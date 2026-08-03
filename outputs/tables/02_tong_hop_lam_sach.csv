@@ -1,0 +1,8 @@
+﻿ten_bang,so_dong_truoc,so_dong_sau,so_dong_loai,ly_do_chinh
+orders,99441,99441,0,Loai trung theo order_id va loai order_id thieu
+customers,99441,99441,0,Loai trung theo customer_id; chuan hoa city va state
+order_items,112650,112650,0,Loai trung khoa ghep; giu price > 0 va freight >= 0
+payments,103886,103886,0,Loai trung khoa ghep; giu payment_value >= 0; doi installments <= 0 thanh 1: 2
+products,32951,32951,0,Loai trung product_id; dien category thieu: 610
+sellers,3095,3095,0,Loai trung seller_id; chuan hoa city va state
+category_translation,71,71,0,Loai trung product_category_name va chuan hoa chu thuong

@@ -1,0 +1,61 @@
+﻿pham_vi_fit,component,feature_goc,chi_tiet,gia_tri
+train_fit,Pipeline,tất cả,số dòng trước preprocessing,62054
+train_fit,Pipeline,tất cả,số dòng sau preprocessing,62054
+train_fit,VectorAssembler,features,tổng chiều dài features vector,141
+train_fit,Imputer,item_count,median,1.0
+train_fit,Imputer,product_count,median,1.0
+train_fit,Imputer,seller_count,median,1.0
+train_fit,Imputer,total_price,median,85.99
+train_fit,Imputer,total_freight,median,17.14
+train_fit,Imputer,average_item_price,median,79.0
+train_fit,Imputer,total_weight_g,median,750.0
+train_fit,Imputer,total_volume_cm3,median,7200.0
+train_fit,Imputer,freight_ratio,median,0.2244
+train_fit,Imputer,purchase_year,median,2018.0
+train_fit,Imputer,purchase_month,median,6.0
+train_fit,Imputer,purchase_day_of_week,median,4.0
+train_fit,Imputer,purchase_hour,median,15.0
+train_fit,Imputer,estimated_delivery_days,median,24.0
+train_fit,Imputer,customer_seller_same_state,median,0.0
+train_fit,StringIndexer,customer_state,số category thực tế,27
+train_fit,StringIndexer,customer_state,số label trong mapping,27
+train_fit,OneHotEncoder,customer_state,categorySizes,28
+train_fit,OneHotEncoder,customer_state,kích thước output vector,28
+train_fit,StringIndexer,main_seller_state,số category thực tế,22
+train_fit,StringIndexer,main_seller_state,số label trong mapping,22
+train_fit,OneHotEncoder,main_seller_state,categorySizes,23
+train_fit,OneHotEncoder,main_seller_state,kích thước output vector,23
+train_fit,StringIndexer,main_category,số category thực tế,74
+train_fit,StringIndexer,main_category,số label trong mapping,74
+train_fit,OneHotEncoder,main_category,categorySizes,75
+train_fit,OneHotEncoder,main_category,kích thước output vector,75
+train_full,Pipeline,tất cả,số dòng trước preprocessing,77379
+train_full,Pipeline,tất cả,số dòng sau preprocessing,77379
+train_full,VectorAssembler,features,tổng chiều dài features vector,141
+train_full,Imputer,item_count,median,1.0
+train_full,Imputer,product_count,median,1.0
+train_full,Imputer,seller_count,median,1.0
+train_full,Imputer,total_price,median,85.8
+train_full,Imputer,total_freight,median,17.16
+train_full,Imputer,average_item_price,median,79.0
+train_full,Imputer,total_weight_g,median,750.0
+train_full,Imputer,total_volume_cm3,median,7250.0
+train_full,Imputer,freight_ratio,median,0.2244
+train_full,Imputer,purchase_year,median,2018.0
+train_full,Imputer,purchase_month,median,6.0
+train_full,Imputer,purchase_day_of_week,median,4.0
+train_full,Imputer,purchase_hour,median,15.0
+train_full,Imputer,estimated_delivery_days,median,24.0
+train_full,Imputer,customer_seller_same_state,median,0.0
+train_full,StringIndexer,customer_state,số category thực tế,27
+train_full,StringIndexer,customer_state,số label trong mapping,27
+train_full,OneHotEncoder,customer_state,categorySizes,28
+train_full,OneHotEncoder,customer_state,kích thước output vector,28
+train_full,StringIndexer,main_seller_state,số category thực tế,22
+train_full,StringIndexer,main_seller_state,số label trong mapping,22
+train_full,OneHotEncoder,main_seller_state,categorySizes,23
+train_full,OneHotEncoder,main_seller_state,kích thước output vector,23
+train_full,StringIndexer,main_category,số category thực tế,74
+train_full,StringIndexer,main_category,số label trong mapping,74
+train_full,OneHotEncoder,main_category,categorySizes,75
+train_full,OneHotEncoder,main_category,kích thước output vector,75

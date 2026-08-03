@@ -1,0 +1,11 @@
+﻿buoc,khoa_kiem_tra,so_dong,so_khoa_khac_nhau,so_dong_nhan_ban,so_khoa_null
+products_join_translation,product_id,32951,32951,0,0
+items_join_products,"order_id, order_item_id",112650,112650,0,0
+items_join_sellers,"order_id, order_item_id",112650,112650,0,0
+items_order_hoan_chinh,order_id,98666,98666,0,0
+payments_order_hoan_chinh,order_id,99440,99440,0,0
+orders,order_id,96470,96470,0,0
+orders_join_customers,order_id,96470,96470,0,0
+orders_join_items,order_id,96470,96470,0,0
+orders_join_payments,order_id,96470,96470,0,0
+orders_enriched_cuoi,order_id,96470,96470,0,0

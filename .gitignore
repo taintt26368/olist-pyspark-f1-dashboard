@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.py[cod]
+.codex_tmp_f1/
+backup_before_f1/
+spark_warehouse/
+metastore_db/
+derby.log
+.streamlit/secrets.toml
+data/raw/
+data/processed_csv/
+data/output/
+*.zip
+*.log
+

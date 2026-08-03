@@ -1,0 +1,10 @@
+﻿ten_bang,noi_dung,so_dong
+orders,Don delivered thieu ngay giao thuc te hoac ngay du kien,8
+order_items,price khong lon hon 0,0
+order_items,freight_value am,0
+payments,payment_installments khong lon hon 0,2
+payments,payment_value am,0
+reviews,review_id bi lap,814
+reviews,review_score nam ngoai khoang 1 den 5,0
+products,Thieu product_category_name,610
+products,Thieu trong luong hoac kich thuoc,2

@@ -1,0 +1,3 @@
+﻿model,point_index,threshold_score,tp_cumulative,fp_cumulative,tpr,fpr,total_positive,total_negative
+Baseline majority class,0,above_max_probability,0,0,0.0,0.0,1261,17830
+Baseline majority class,1,0.0,1261,17830,1.0,1.0,1261,17830
