@@ -1,5 +1,10 @@
 # Olist PySpark F1 dashboard
 
+## Link public
+
+- Streamlit: https://olist-pyspark-f1-dashboard-pyycyhydydor5w9gc7rqqh.streamlit.app/
+- GitHub: https://github.com/taintt26368/olist-pyspark-f1-dashboard
+
 Dashboard Streamlit trình bày toàn bộ quy trình phân tích dữ liệu và đánh giá model của project Olist bằng PySpark.
 
 ## Nội dung
@@ -25,4 +30,3 @@ Xem thêm [README_STREAMLIT.md](README_STREAMLIT.md) để biết cấu trúc v�
 ## Dữ liệu công khai
 
 Repository không chứa CSV raw, dữ liệu processed, `orders_enriched.csv`, môi trường ảo, backup hoặc Spark warehouse. Dashboard chỉ phân phối các bảng/biểu đồ tổng hợp và tài liệu bằng chứng của lần chạy chính thức.
-
