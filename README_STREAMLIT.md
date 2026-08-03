@@ -2,7 +2,7 @@
 
 ## Link đã triển khai
 
-- Ứng dụng public: https://olist-pyspark-f1-dashboard-pyycyhydydor5w9gc7rqqh.streamlit.app/
+- Ứng dụng public: https://olist-f1-pyspark.streamlit.app/
 - Source code: https://github.com/taintt26368/olist-pyspark-f1-dashboard
 
 Ứng dụng trình bày kết quả chính thức của quy trình 01–05 mà không huấn luyện lại model mỗi lần người xem mở trang. Mọi KPI, bảng và biểu đồ đều được đọc từ `outputs/tables` và `outputs/charts`.

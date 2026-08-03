@@ -2,7 +2,7 @@
 
 ## Link public
 
-- Streamlit: https://olist-pyspark-f1-dashboard-pyycyhydydor5w9gc7rqqh.streamlit.app/
+- Streamlit: https://olist-f1-pyspark.streamlit.app/
 - GitHub: https://github.com/taintt26368/olist-pyspark-f1-dashboard
 
 Dashboard Streamlit trình bày toàn bộ quy trình phân tích dữ liệu và đánh giá model của project Olist bằng PySpark.
